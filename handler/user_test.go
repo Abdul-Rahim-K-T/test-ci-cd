@@ -16,7 +16,7 @@ import (
 	"gorm.io/gorm"
 )
 
-//Test User Get Api
+
 
 func TestGetUser(t*testing.T){
 	a:=assert.New(t)
@@ -51,7 +51,7 @@ func SetUserGetRouter(url string)(*http.Request,*httptest.ResponseRecorder){
 	r:=gin.New()
 	r.GET("/:id",GetUserById)
 
-	// req,err:=http.NewRequest(http.MethodGet,url,nil)
+	// _,err:=http.NewRequest(http.MethodGet,url,nil)
 	// if err!=nil{
 	// 	panic(err)
 	// }
@@ -81,7 +81,7 @@ return user,err
 return user,nil
 }
 
-//  test user create api
+
 func TestCreateUser(t *testing.T){
 	a:=assert.New(t)
 
@@ -110,10 +110,10 @@ func TestCreateUser(t *testing.T){
 	if err:=json.Unmarshal(body,&actual);err!=nil{
 		a.Error(err)
 	}
-	actual=models.User{}
-	if err:=json.Unmarshal(body,&actual);err!=nil{
-		a.Error(err)
-	}
+	// actual=models.User{}
+	// if err:=json.Unmarshal(body,&actual);err!=nil{
+	// 	a.Error(err)
+	// }
 	actual.Model=gorm.Model{}
 	expected:=user
 	expected.Model=gorm.Model{}
@@ -136,7 +136,7 @@ func SetCreateUserRout(body *bytes.Buffer)(*http.Request,*httptest.ResponseRecor
 }
 
 
-// test user update api
+
 
 func TestUpdateUser(t *testing.T){
 	a:=assert.New(t)
@@ -201,7 +201,7 @@ func SetUpdateUserRouter(url string,body *bytes.Buffer)(*http.Request,*httptest.
 
 
 func cleanupDatabase(t *testing.T){
-	//  open a database  connection (use the same connection settings as in your tests)
+	
 	db:=database.InitDB()
 
 	if err:=db.Exec("TRUNCATE TABLE  USERS  CASCADE").Error;err!=nil{
